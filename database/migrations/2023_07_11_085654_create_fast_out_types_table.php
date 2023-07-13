@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('fast_out_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('player_id');
             $table->integer('value');
             $table->timestamps();
         });

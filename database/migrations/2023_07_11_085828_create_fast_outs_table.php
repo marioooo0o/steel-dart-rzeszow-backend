@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('fast_outs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('fast_out_type_id');
+            $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('legs_won');
             $table->integer('legs_lost');
             $table->double('avg', 3, 2);
-            $table->integer('180_count');
+            $table->integer('max_amount');
             $table->timestamps();
         });
     }

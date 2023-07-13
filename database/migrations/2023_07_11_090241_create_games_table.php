@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('player_two_score');
             $table->double('player_one_avg', 3, 2);
             $table->double('player_two_avg', 3, 2);
-            $table->integer('player_one_180_count');
-            $table->integer('player_two_180_count');
+            $table->integer('player_one_max_amount');
+            $table->integer('player_two_max_amount');
             $table->unsignedBigInteger('league_id');
             $table->unsignedBigInteger('winner');
             $table->timestamps();

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('high_outs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('high_out_type_id');
+            $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ class Game extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['player_one_score', 'player_two_score', 'player_one_avg', 'player_two_avg', 'player_one_count_180', 'player_two_count_180'];
+    protected $fillable = ['player_one_score', 'player_two_score', 'player_one_avg', 'player_two_avg', 'player_one_max_amount', 'player_two_max_amount'];
 
     public function high_outs(): HasMany
     {
