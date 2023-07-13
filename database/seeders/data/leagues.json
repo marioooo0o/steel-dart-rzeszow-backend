@@ -1,0 +1,8 @@
+{
+    "leagues":
+        [
+            {"league_name":  "Pierwsza Liga"},
+            {"league_name":  "Druga Liga"},
+            {"league_name":  "Trzecia Liga"}
+        ]
+}
