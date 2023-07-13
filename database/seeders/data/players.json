@@ -1,0 +1,9 @@
+{
+    "players":
+        [
+            {"name": "Filip", "second_name": "Kula", "points": 0, "balance": 0, "legs_won":  0, "legs_lost":  0, "avg": 0, "max_amount":  0, "league_name": "Pierwsza Liga"},
+            {"name": "Dariusz", "second_name": "Furman", "points": 0, "balance": 0, "legs_won":  0, "legs_lost":  0, "avg": 0, "max_amount":  0, "league_name": "Pierwsza Liga"},
+            {"name": "Krzysztof", "second_name": "Furman", "points": 0, "balance": 0, "legs_won":  0, "legs_lost":  0, "avg": 0, "max_amount":  0, "league_name": "Pierwsza Liga"},
+            {"name": "Hieronim", "second_name": "Furgał", "points": 0, "balance": 0, "legs_won":  0, "legs_lost":  0, "avg": 0, "max_amount":  0, "league_name": "Pierwsza Liga"}
+        ]
+}
