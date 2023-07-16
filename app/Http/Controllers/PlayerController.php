@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\PlayerResource;
 use App\Models\Player;
+use App\Services\PlayerService;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
 class PlayerController extends BaseController
 {
+    private PlayerService $playerService;
+
+    public function __construct(PlayerService $playerService)
+    {
+        $this->playerService = $playerService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,6 +44,13 @@ class PlayerController extends BaseController
             'league_id`' => ['required', 'integer', 'exists:legues,id']
         ]);
 
+        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_nme', $validatedData['second_name'])->exists();
+        if($isPlayerExist){
+            return $this->sendError($validatedData, "Player already exists");
+        }
+
+        $player = $this->playerService->create($validatedData);
+        return $this->sendResponse($player, "Player successfully created", Response::HTTP_CREATED);
     }
 
     /**
