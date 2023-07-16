@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlayerStoreRequest;
 use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\PlayerResource;
 use App\Models\Player;
@@ -36,21 +37,17 @@ class PlayerController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PlayerStoreRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string'],
-            'second_name' => ['required', 'string'],
-            'league_id`' => ['required', 'integer', 'exists:legues,id']
-        ]);
+        $validatedData = $request->validated();
 
-        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_nme', $validatedData['second_name'])->exists();
+        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
         if($isPlayerExist){
             return $this->sendError($validatedData, "Player already exists");
         }
-
         $player = $this->playerService->create($validatedData);
-        return $this->sendResponse($player, "Player successfully created", Response::HTTP_CREATED);
+
+        return $this->sendResponse(new PlayerResource($player), "Player successfully created", Response::HTTP_CREATED);
     }
 
     /**

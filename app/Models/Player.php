@@ -12,7 +12,7 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'second_name', 'points', 'balance', 'legs_won', 'legs_lost', 'avg', 'max_amount'];
+    protected $fillable = ['name', 'second_name', 'points', 'balance', 'legs_won', 'legs_lost', 'avg', 'max_amount', 'league_id'];
 
     public function fast_outs(): HasManyThrough
     {
