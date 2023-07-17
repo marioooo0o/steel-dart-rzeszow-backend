@@ -59,7 +59,7 @@ class PlayerController extends BaseController
         if($player instanceof Player){
             return $this->sendResponse(new PlayerResource($player), "Player retrieved successfully");
         }else{
-            return $this->sendError($player);
+            return $this->sendError($player, "Player does not exist", Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -74,7 +74,7 @@ class PlayerController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PlayerStoreRequest $request, string $id)
     {
         //
     }
@@ -84,6 +84,12 @@ class PlayerController extends BaseController
      */
     public function destroy(string $id)
     {
-        //
+        $player = Player::findOrFail($id);
+        if($player instanceof Player){
+            $player->delete();
+            return $this->sendResponse(new PlayerResource($player), "Player deleted successfully");
+        }else{
+            return $this->sendError($player, "Player does not exist", Response::HTTP_NOT_FOUND);
+        }
     }
 }
