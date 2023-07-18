@@ -24,4 +24,5 @@ Route::controller(PlayerController::class)->group(function (){
     Route::get('players/{id}', 'show');
     Route::post('players', 'store');
     Route::delete('players/{id}', 'destroy');
+    Route::put('players/{id}', 'update');
 });

@@ -7,8 +7,8 @@ use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\PlayerResource;
 use App\Models\Player;
 use App\Services\PlayerService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 
 class PlayerController extends BaseController
 {
@@ -42,9 +42,11 @@ class PlayerController extends BaseController
         $validatedData = $request->validated();
 
         $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
+
         if($isPlayerExist){
             return $this->sendError($validatedData, "Player already exists");
         }
+
         $player = $this->playerService->create($validatedData);
 
         return $this->sendResponse(new PlayerResource($player), "Player successfully created", Response::HTTP_CREATED);
@@ -56,6 +58,7 @@ class PlayerController extends BaseController
     public function show(string $id)
     {
         $player = Player::findOrFail($id);
+
         if($player instanceof Player){
             return $this->sendResponse(new PlayerResource($player), "Player retrieved successfully");
         }else{
@@ -76,7 +79,24 @@ class PlayerController extends BaseController
      */
     public function update(PlayerStoreRequest $request, string $id)
     {
-        //
+        try {
+            $player = Player::findOrFail($id);
+
+            $validatedData = $request->validated();
+
+            $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
+
+            if($isPlayerExist){
+                return $this->sendError("Player already exists");
+            }
+
+            $player = $this->playerService->update($player, $validatedData);
+
+            return $this->sendResponse($player, "Player updated successfully");
+
+        }catch (ModelNotFoundException $exception){
+            return $this->sendError('Player not found', null,Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -85,6 +105,7 @@ class PlayerController extends BaseController
     public function destroy(string $id)
     {
         $player = Player::findOrFail($id);
+
         if($player instanceof Player){
             $player->delete();
             return $this->sendResponse(new PlayerResource($player), "Player deleted successfully");
