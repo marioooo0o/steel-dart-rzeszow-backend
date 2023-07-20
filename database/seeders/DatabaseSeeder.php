@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
                 LeagueSeeder::class,
                 HighOutTypeSeeder::class,
                 FastOutTypeSeeder::class,
-                PlayerSeeder::class
+                PlayerSeeder::class,
+                DummyGamesSeeder::class
             ]);
     }
 }

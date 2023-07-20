@@ -1,0 +1,40 @@
+{
+    "games": [
+        {
+            "player_one": 1,
+            "player_two": 2,
+            "player_one_score": 4,
+            "player_two_score": 6,
+            "player_one_avg": 78.5,
+            "player_two_avg": 83.2,
+            "player_one_max_amount": 140,
+            "player_two_max_amount": 180,
+            "league_id": 1,
+            "winner": 2
+        },
+        {
+            "player_one": 3,
+            "player_two": 4,
+            "player_one_score": 3,
+            "player_two_score": 2,
+            "player_one_avg": 72.8,
+            "player_two_avg": 67.2,
+            "player_one_max_amount": 120,
+            "player_two_max_amount": 140,
+            "league_id": 2,
+            "winner": 3
+        },
+        {
+            "player_one": 2,
+            "player_two": 3,
+            "player_one_score": 5,
+            "player_two_score": 5,
+            "player_one_avg": 81.4,
+            "player_two_avg": 78.9,
+            "player_one_max_amount": 160,
+            "player_two_max_amount": 150,
+            "league_id": 3,
+            "winner": 0
+        }
+    ]
+}
