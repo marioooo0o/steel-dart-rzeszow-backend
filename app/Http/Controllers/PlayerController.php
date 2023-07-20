@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PlayerStoreRequest;
+use App\Http\Requests\PlayerUpdateRequest;
 use App\Http\Resources\PlayerCollection;
 use App\Http\Resources\PlayerResource;
 use App\Models\Player;
@@ -12,12 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PlayerController extends BaseController
 {
-    private PlayerService $playerService;
-
-    public function __construct(PlayerService $playerService)
-    {
-        $this->playerService = $playerService;
-    }
+    public function __construct(private PlayerService $playerService){}
     /**
      * Display a listing of the resource.
      */
@@ -27,25 +23,17 @@ class PlayerController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(PlayerStoreRequest $request)
     {
         $validatedData = $request->validated();
 
-        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
-
-        if($isPlayerExist){
-            return $this->sendError($validatedData, "Player already exists");
-        }
+//        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
+//
+//        if($isPlayerExist){
+//            return $this->sendError($validatedData, "Player already exists");
+//        }
 
         $player = $this->playerService->create($validatedData);
 
@@ -67,36 +55,23 @@ class PlayerController extends BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(PlayerStoreRequest $request, string $id)
+    public function update(PlayerUpdateRequest $request, string $id)
     {
-        try {
-            $player = Player::findOrFail($id);
+        $player = Player::findOrFail($id);
 
-            $validatedData = $request->validated();
+        $validatedData = $request->validated();
 
-            $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
+//        $isPlayerExist = Player::where('name', $validatedData['name'])->where('second_name', $validatedData['second_name'])->exists();
 
-            if($isPlayerExist){
-                return $this->sendError("Player already exists");
-            }
+//        if($isPlayerExist){
+//            return $this->sendError("Player already exists");
+//        }
 
-            $player = $this->playerService->update($player, $validatedData);
+        $player = $this->playerService->update($player, $validatedData);
 
-            return $this->sendResponse($player, "Player updated successfully");
-
-        }catch (ModelNotFoundException $exception){
-            return $this->sendError('Player not found', null,Response::HTTP_NOT_FOUND);
-        }
+        return $this->sendResponse($player, "Player updated successfully");
     }
 
     /**
