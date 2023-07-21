@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GameStoreRequest;
+use App\Http\Requests\GameUpdateRequest;
 use App\Http\Resources\GameCollection;
 use App\Http\Resources\GameResource;
 use App\Http\Resources\PlayerResource;
@@ -52,9 +53,15 @@ class GameController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GameUpdateRequest $request, string $id)
     {
+        $game = Game::findOrFail($id);
 
+        $validatedData = $request->validated();
+
+        $game = $this->gameService->update($game, $validatedData);
+
+        return $this->sendResponse(new GameResource($game), "Game updated successfully");
     }
 
     /**

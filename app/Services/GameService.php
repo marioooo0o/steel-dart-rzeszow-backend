@@ -7,21 +7,7 @@ use App\Models\Player;
 
 class GameService
 {
-    public function store(array $gameData): Game
-    {
-        $game = Game::create([
-            'player_one' => $gameData['player_one'],
-            'player_two' => $gameData['player_two'],
-            'player_one_score' => $gameData['player_one_score'],
-            'player_two_score' => $gameData['player_two_score'],
-            'player_one_avg' => $gameData['player_one_avg'],
-            'player_two_avg' => $gameData['player_two_avg'],
-            'player_one_max_amount' => $gameData['player_one_max_amount'],
-            'player_two_max_amount' => $gameData['player_two_max_amount'],
-            'league_id' => $gameData['league_id'],
-            'winner' => $gameData['winner']
-        ]);
-
+    private function updatePlayerStats(Game $game): void{
         $playerOne = Player::find($game->player_one);
         $playerOne->legs_won += $game->player_one_score;
         $playerOne->legs_lost += $game->player_two_score;
@@ -48,6 +34,44 @@ class GameService
 
         $playerOne->save();
         $playerTwo->save();
+    }
+
+    public function store(array $gameData): Game
+    {
+        $game = Game::create([
+            'player_one' => $gameData['player_one'],
+            'player_two' => $gameData['player_two'],
+            'player_one_score' => $gameData['player_one_score'],
+            'player_two_score' => $gameData['player_two_score'],
+            'player_one_avg' => $gameData['player_one_avg'],
+            'player_two_avg' => $gameData['player_two_avg'],
+            'player_one_max_amount' => $gameData['player_one_max_amount'],
+            'player_two_max_amount' => $gameData['player_two_max_amount'],
+            'league_id' => $gameData['league_id'],
+            'winner' => $gameData['winner']
+        ]);
+
+        $this->updatePlayerStats($game);
+
+        return $game;
+    }
+
+    public function update(Game $game, array $gameData): Game
+    {
+        $game->player_one = $gameData['player_one'];
+        $game->player_two = $gameData['player_two'];
+        $game->player_one_score = $gameData['player_one_score'];
+        $game->player_two_score = $gameData['player_two_score'];
+        $game->player_one_avg = $gameData['player_one_avg'];
+        $game->player_two_avg = $gameData['player_two_avg'];
+        $game->player_one_max_amount = $gameData['player_one_max_amount'];
+        $game->player_two_max_amount = $gameData['player_two_max_amount'];
+        $game->league_id = $gameData['league_id'];
+        $game->winner = $gameData['winner'];
+
+        $this->updatePlayerStats($game);
+
+        $game->save();
 
         return $game;
     }
