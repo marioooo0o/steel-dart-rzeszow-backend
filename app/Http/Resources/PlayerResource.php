@@ -22,7 +22,7 @@ class PlayerResource extends JsonResource
             'balance' => $this->balance,
             'legsWon' => $this->legs_won,
             'legsLost' => $this->legs_lost,
-            'avg' => $this->avg ? (int)$this->avg : 0,
+            'average3Darts' => $this->avg ? (int)$this->avg : 0,
             'maxAmount' => $this->max_amount ? (int)$this->max_amount : 0
         ];
     }

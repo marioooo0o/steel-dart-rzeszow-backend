@@ -25,7 +25,7 @@ class PlayerSeeder extends Seeder
                 'balance' => $value->balance,
                 'legs_won' => $value->legs_won,
                 'legs_lost' => $value->legs_lost,
-                'avg' => $value->avg,
+                'average_3_dart' => $value->avg,
                 'max_amount' => $value->max_amount,
                 'league_id' => $league->id
             ]);

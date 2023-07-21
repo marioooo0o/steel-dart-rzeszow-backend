@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('balance');
             $table->integer('legs_won');
             $table->integer('legs_lost');
-            $table->double('avg', 3, 2);
+            $table->double('average_3_dart', 3, 2);
             $table->integer('max_amount');
             $table->timestamps();
         });

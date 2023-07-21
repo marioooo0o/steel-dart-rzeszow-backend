@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\GameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PlayerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,12 @@ Route::controller(PlayerController::class)->group(function (){
     Route::post('players', 'store');
     Route::delete('players/{id}', 'destroy');
     Route::put('players/{id}', 'update');
+});
+
+Route::controller(GameController::class)->group(function (){
+    Route::get('games', 'index');
+    Route::get('games/{id}', 'show');
+    Route::post('games', 'store');
+    Route::delete('games/{id}', 'destroy');
+    Route::put('games/{id}', 'update');
 });

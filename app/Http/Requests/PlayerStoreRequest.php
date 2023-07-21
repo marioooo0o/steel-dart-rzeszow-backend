@@ -34,7 +34,7 @@ class PlayerStoreRequest extends FormRequest
         return [
             'name.required' => 'Name is required',
             'second_name.required' => 'Second name is required',
-            'league_id.exists' => "Passed league is invalid"
+            'league_id.exists' => 'Passed league is invalid'
         ];
     }
 }

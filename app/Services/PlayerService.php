@@ -15,7 +15,7 @@ class PlayerService
             'balance' => 0,
             'legs_won' => 0,
             'legs_lost' => 0,
-            'avg' => 0,
+            'average_3_dart' => 0,
             'max_amount' => 0,
               'league_id' => $playerData['league_id']
         ]);
