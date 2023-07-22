@@ -12,7 +12,7 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'second_name', 'points', 'balance', 'legs_won', 'legs_lost', 'avg', 'max_amount', 'league_id'];
+    protected $fillable = ['name', 'second_name', 'points', 'balance', 'legs_won', 'legs_lost', 'average_3_dart', 'max_amount', 'league_id'];
 
     public function fast_outs(): HasManyThrough
     {
@@ -21,7 +21,7 @@ class Player extends Model
 
     public function hight_outs(): HasManyThrough
     {
-        return $this->hasManyThrough(HighOutTypeh::class, HighOut::class);
+        return $this->hasManyThrough(HighOutType::class, HighOut::class);
     }
 
     public function league(): BelongsTo
