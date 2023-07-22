@@ -81,11 +81,11 @@ class PlayerController extends BaseController
     {
         $player = Player::findOrFail($id);
 
-        if($player instanceof Player){
-            $player->delete();
-            return $this->sendResponse(new PlayerResource($player), "Player deleted successfully");
-        }else{
-            return $this->sendError($player, "Player does not exist", Response::HTTP_NOT_FOUND);
+            if($player instanceof Player){
+                $player->delete();
+                return $this->sendResponse(new PlayerResource($player), "Player deleted successfully");
+            }else{
+                return $this->sendError($player, "Player does not exist", Response::HTTP_NOT_FOUND);
         }
     }
 }

@@ -6,11 +6,8 @@ use App\Http\Requests\GameStoreRequest;
 use App\Http\Requests\GameUpdateRequest;
 use App\Http\Resources\GameCollection;
 use App\Http\Resources\GameResource;
-use App\Http\Resources\PlayerResource;
 use App\Models\Game;
-use App\Models\Player;
 use App\Services\GameService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends BaseController
@@ -69,6 +66,13 @@ class GameController extends BaseController
      */
     public function destroy(string $id)
     {
-        //
+        $game = Game::findOrFail($id);
+
+        if($game instanceof Game){
+            $game->delete();
+            return $this->sendResponse(new GameResource($game), "Game deleted successfully");
+        }else{
+            return $this->sendError($game, "Game does not exist", Response::HTTP_NOT_FOUND);
+        }
     }
 }
