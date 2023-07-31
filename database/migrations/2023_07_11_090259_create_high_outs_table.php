@@ -17,6 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('game_id');
             $table->timestamps();
+
+            $table->foreign('high_out_type_id')->references('id')->on('high_out_types')->onDelete('cascade');
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
         });
     }
 

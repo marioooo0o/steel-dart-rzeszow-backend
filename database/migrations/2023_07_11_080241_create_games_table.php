@@ -24,6 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('league_id');
             $table->unsignedBigInteger('winner');
             $table->timestamps();
+
+            $table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
         });
     }
 
